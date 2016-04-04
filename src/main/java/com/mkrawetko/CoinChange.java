@@ -28,15 +28,16 @@ public class CoinChange {
         if (coins.length <= 0 || amount == 0) {
             return amount == 0 ? 0 : -1;
         }
-        int[] min = new int[amount + 1];
         Arrays.sort(coins);
+        int[] min = new int[amount + 1];
         for (int i = coins[0]; i <= amount; i++) {
 
             for (int coin : coins) {
                 if (coin <= i) {
                     int prevIdx = i - coin;
-                    if (prevIdx == 0 || (min[prevIdx] != 0 && (min[i] == 0 || min[prevIdx] + 1 < min[i]))) {
-                        min[i] = min[prevIdx] + 1;
+                    int prevSolution = min[prevIdx];
+                    if (prevIdx == 0 || (prevSolution != 0 && (min[i] == 0 || prevSolution + 1 < min[i]))) {
+                        min[i] = prevSolution + 1;
                     }
                 }
             }
