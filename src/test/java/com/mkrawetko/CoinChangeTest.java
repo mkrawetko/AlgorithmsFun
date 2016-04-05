@@ -45,5 +45,13 @@ public class CoinChangeTest {
         assertThat(actual, equalTo(expected));
     }
 
+    @Test
+    public void coinChangeRecursive() throws Exception {
+
+        final int actual = underTest.coinChangeRecursive(coins, amount);
+
+        assertThat(actual, equalTo(expected));
+    }
+
 
 }

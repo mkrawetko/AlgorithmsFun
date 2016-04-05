@@ -45,4 +45,42 @@ public class CoinChange {
         return min[amount] != 0 ? min[amount] : -1;
     }
 
+    public int coinChangeRecursive(int[] coins, int amount) {
+        if (coins.length <= 0 || amount == 0) {
+            return amount == 0 ? 0 : -1;
+        }
+        Arrays.sort(coins);
+
+        int minCount = count(coins, coins.length - 1, amount, 0);
+        return minCount == Integer.MAX_VALUE ? -1 : minCount;
+    }
+
+    private int count(final int[] coins, final int idx, int amount, int stepCount) {
+        int bestCount = Integer.MAX_VALUE;
+        if (amount % coins[idx] == 0) {
+            int newCount = stepCount + (amount / coins[idx]);
+            bestCount = Math.max(newCount, bestCount);
+        }
+        amount -= coins[idx];
+        stepCount++;
+        if (amount == 0) {
+            return stepCount;
+        }
+        if (amount < coins[idx]) {
+            return Integer.MAX_VALUE;
+        }
+
+        for (int i = coins.length - 1; i >= 0; i--) {
+
+
+            if (bestCount < stepCount + 1) {
+                break;
+            }
+            bestCount = Math.min(count(coins, i, amount, stepCount), bestCount);
+
+
+        }
+        return bestCount;
+
+    }
 }
