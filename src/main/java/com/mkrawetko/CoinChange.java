@@ -51,7 +51,7 @@ public class CoinChange {
         }
         Arrays.sort(coins);
 
-        int minCount = count(coins, coins.length - 1, amount, 0);
+        final int minCount = count(coins, coins.length - 1, amount, 0);
         return minCount == Integer.MAX_VALUE ? -1 : minCount;
     }
 
@@ -59,24 +59,25 @@ public class CoinChange {
         int bestCount = Integer.MAX_VALUE;
         if (amount % coins[idx] == 0) {
             int newCount = stepCount + (amount / coins[idx]);
-            bestCount = Math.max(newCount, bestCount);
-        }
-        amount -= coins[idx];
-        stepCount++;
-        if (amount == 0) {
-            return stepCount;
-        }
-        if (amount < coins[idx]) {
-            return Integer.MAX_VALUE;
+            bestCount = Math.min(newCount, bestCount);
         }
 
-        for (int i = coins.length - 1; i >= 0; i--) {
+        if (idx == 0) {
+            return bestCount;
+        }
 
+        for (int i = amount / coins[idx]; i >= 0; i--) {
 
-            if (bestCount < stepCount + 1) {
+            final int newAmount = amount - i * coins[idx];
+            final int newCount = stepCount + i;
+            if (newAmount == 0) {
+                return newCount;
+            }
+
+            if (bestCount < newCount) {
                 break;
             }
-            bestCount = Math.min(count(coins, i, amount, stepCount), bestCount);
+            bestCount = Math.min(count(coins, idx - 1, newAmount, newCount), bestCount);
 
 
         }
