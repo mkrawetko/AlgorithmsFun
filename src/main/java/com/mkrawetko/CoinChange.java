@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class CoinChange {
 
+    int minCount = Integer.MAX_VALUE;
+
     /**
      * You are given coins of different denominations and a total amount of money amount.
      * Write a function to compute the fewest number of coins that you need to make up that amount.
@@ -51,19 +53,18 @@ public class CoinChange {
         }
         Arrays.sort(coins);
 
-        final int minCount = count(coins, coins.length - 1, amount, 0);
+        count(coins, coins.length - 1, amount, 0);
         return minCount == Integer.MAX_VALUE ? -1 : minCount;
     }
 
-    private int count(final int[] coins, final int idx, int amount, int stepCount) {
-        int bestCount = Integer.MAX_VALUE;
+    private void count(final int[] coins, final int idx, int amount, int stepCount) {
         if (amount % coins[idx] == 0) {
             int newCount = stepCount + (amount / coins[idx]);
-            bestCount = Math.min(newCount, bestCount);
+            minCount = Math.min(newCount, minCount);
         }
 
         if (idx == 0) {
-            return bestCount;
+            return;
         }
 
         for (int i = amount / coins[idx]; i >= 0; i--) {
@@ -71,17 +72,17 @@ public class CoinChange {
             final int newAmount = amount - i * coins[idx];
             final int newCount = stepCount + i;
             if (newAmount == 0) {
-                return newCount;
+                minCount = Math.min(minCount, newCount);
+                return;
             }
 
-            if (bestCount < newCount) {
+            if (newAmount <= 0 || newCount + 1 >= minCount) {
                 break;
             }
-            bestCount = Math.min(count(coins, idx - 1, newAmount, newCount), bestCount);
 
+            count(coins, idx - 1, newAmount, newCount);
 
         }
-        return bestCount;
 
     }
 }
