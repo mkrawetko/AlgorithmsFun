@@ -16,7 +16,6 @@ public class HouseRobber {
             return 0;
         }
 
-        int sum = 0;
         int robbedPrevious = 0;
         int donNotRobbedPrevious = 0;
         for (int num : nums) {
