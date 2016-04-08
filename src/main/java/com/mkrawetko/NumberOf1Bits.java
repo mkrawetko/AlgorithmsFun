@@ -11,8 +11,13 @@ public class NumberOf1Bits {
 
     // you need to treat n as an unsigned value
     public int hammingWeight(int n) {
-
-
-        return 0;
+        int sum = n % 2 == 0 ? 0 : 1;
+        while (n != 0) {
+            n = n >>> 1;
+            if (n % 2 == 1) {
+                sum++;
+            }
+        }
+        return sum;
     }
 }

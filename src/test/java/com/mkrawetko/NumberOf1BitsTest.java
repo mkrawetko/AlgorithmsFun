@@ -7,6 +7,7 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
+import static java.lang.Integer.parseUnsignedInt;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -32,6 +33,7 @@ public class NumberOf1BitsTest {
                 {7, 3},  //0111
                 {8, 1},  //1000
                 {11, 3}, //1011
+                {parseUnsignedInt("2147483648"), 1}, //10000000000000000000000000000000
         });
     }
 
