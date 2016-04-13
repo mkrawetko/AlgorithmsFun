@@ -10,9 +10,49 @@ package com.mkrawetko;
  */
 public class UglyNumber {
 
+//    private static final LinkedList<Integer> primes = new LinkedList<>(Arrays.asList(7));
+
     public boolean isUgly(int num) {
 
-        return num == 1;
+        if (num <= 0) {
+            return false;
+        }
 
+        if (num == 7) {
+            return false;
+        }
+        if (num < 11) {
+            return true;
+        }
+
+        if (num % 2 != 0 && num % 3 != 0 && num % 5 != 0) {
+            return false;
+        }
+
+        int maxPrimeFactor = (int) Math.ceil(Math.sqrt(num)) + 1;
+//        int maxPrimeFactor = num/3;
+
+
+        int nextPrime = 7;
+        if (nextPrime > maxPrimeFactor) {
+            maxPrimeFactor = num / 2;
+        }
+
+        while (maxPrimeFactor >= nextPrime) {
+            if (maxPrimeFactor % nextPrime == 0) {
+                return false;
+            }
+            nextPrime = getNextPrime(nextPrime);
+        }
+        return true;
+    }
+
+    private int getNextPrime(int base) {
+        final int step = 2;
+        int nextCandidate = base + step;
+        while (nextCandidate % 3 == 0) {
+            nextCandidate += step;
+        }
+        return nextCandidate;
     }
 }

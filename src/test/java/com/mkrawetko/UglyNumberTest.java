@@ -24,11 +24,21 @@ public class UglyNumberTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
+                {0, false},
                 {1, true},
                 {6, true},
+                {7, false},
                 {8, true},
-                {12, false},
+                {11, false},
+                {12, true},
+                {14, false},
+                {15, true},
+                {-16, false},
                 {17, false},
+                {-99, false},
+                {-1000, false},
+                {1332185066, false},
+                {1397794936, false},
                 {-2147483648, false},
         });
     }
