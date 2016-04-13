@@ -35,7 +35,7 @@ public class UglyNumber {
 
         int nextPrime = 7;
         if (nextPrime > maxPrimeFactor) {
-            maxPrimeFactor = num / 2;
+            maxPrimeFactor = (int) Math.ceil(num / 2d);
         }
 
         while (maxPrimeFactor >= nextPrime) {

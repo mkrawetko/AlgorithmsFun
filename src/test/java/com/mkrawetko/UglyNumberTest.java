@@ -35,6 +35,7 @@ public class UglyNumberTest {
                 {15, true},
                 {-16, false},
                 {17, false},
+                {25, true},
                 {-99, false},
                 {-1000, false},
                 {1332185066, false},
