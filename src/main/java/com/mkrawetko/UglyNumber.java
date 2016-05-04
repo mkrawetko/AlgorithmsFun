@@ -25,26 +25,34 @@ public class UglyNumber {
             return true;
         }
 
-        if (num % 2 != 0 && num % 3 != 0 && num % 5 != 0) {
+        boolean isUglyCandidate = num % 2 == 0 || num % 3 == 0 || num % 5 == 0;
+        if (!isUglyCandidate) {
             return false;
         }
 
+
         int maxPrimeFactor = (int) Math.ceil(Math.sqrt(num)) + 1;
-//        int maxPrimeFactor = num/3;
+//        int maxPrimeFactor = num/2+1;
 
+        int primeFactor = -1;
 
-        int nextPrime = 7;
-        if (nextPrime > maxPrimeFactor) {
-            maxPrimeFactor = (int) Math.ceil(num / 2d);
-        }
+        int nextPrime = 2;
 
         while (maxPrimeFactor >= nextPrime) {
-            if (maxPrimeFactor % nextPrime == 0) {
-                return false;
+            if (num % nextPrime == 0) {
+                primeFactor = nextPrime;
+                if (primeFactor > 5) {
+                    return false;
+                } else {
+                    num = num / primeFactor;
+                    maxPrimeFactor = (int) Math.ceil(Math.sqrt(num));
+                    nextPrime = 2;
+//                    primeFactor = -1;
+                }
             }
             nextPrime = getNextPrime(nextPrime);
         }
-        return true;
+        return primeFactor < 0 && num > 5 ? false : true;
     }
 
     private int getNextPrime(int base) {
