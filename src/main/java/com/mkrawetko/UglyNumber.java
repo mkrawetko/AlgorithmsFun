@@ -10,57 +10,26 @@ package com.mkrawetko;
  */
 public class UglyNumber {
 
-//    private static final LinkedList<Integer> primes = new LinkedList<>(Arrays.asList(7));
-
     public boolean isUgly(int num) {
 
         if (num <= 0) {
             return false;
         }
 
-        if (num == 7) {
-            return false;
-        }
-        if (num < 11) {
+        if (num < 7) {
             return true;
         }
 
-        boolean isUglyCandidate = num % 2 == 0 || num % 3 == 0 || num % 5 == 0;
-        if (!isUglyCandidate) {
-            return false;
+        if (num % 2 == 0) {
+            return isUgly(num / 2);
+        }
+        if (num % 3 == 0) {
+            return isUgly(num / 3);
+        }
+        if (num % 5 == 0) {
+            return isUgly(num / 5);
         }
 
-
-        int maxPrimeFactor = (int) Math.ceil(Math.sqrt(num)) + 1;
-//        int maxPrimeFactor = num/2+1;
-
-        int primeFactor = -1;
-
-        int nextPrime = 2;
-
-        while (maxPrimeFactor >= nextPrime) {
-            if (num % nextPrime == 0) {
-                primeFactor = nextPrime;
-                if (primeFactor > 5) {
-                    return false;
-                } else {
-                    num = num / primeFactor;
-                    maxPrimeFactor = (int) Math.ceil(Math.sqrt(num));
-                    nextPrime = 2;
-//                    primeFactor = -1;
-                }
-            }
-            nextPrime = getNextPrime(nextPrime);
-        }
-        return primeFactor < 0 && num > 5 ? false : true;
-    }
-
-    private int getNextPrime(int base) {
-        final int step = 2;
-        int nextCandidate = base + step;
-        while (nextCandidate % 3 == 0) {
-            nextCandidate += step;
-        }
-        return nextCandidate;
+        return false;
     }
 }
