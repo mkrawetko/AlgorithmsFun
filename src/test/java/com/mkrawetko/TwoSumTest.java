@@ -36,7 +36,7 @@ public class TwoSumTest {
 
 
     @org.junit.Test
-    public void robTest() throws Exception {
+    public void testTwoSum() throws Exception {
 
         final int[] actual = underTest.twoSum(nums, target);
 
