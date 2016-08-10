@@ -1,5 +1,9 @@
 package com.mkrawetko;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Given an array of integers,
  * return indices of the two numbers such that they add up to a specific target.
@@ -15,6 +19,30 @@ package com.mkrawetko;
 public class TwoSum {
 
     public int[] twoSum(int[] nums, int target) {
-        return null;
+        ArrayList<Integer> accumulator = new ArrayList<>();
+        findTwoSum(nums, 0, 0, target, accumulator);
+
+
+        return Arrays.stream(accumulator.toArray(new Integer[0])).mapToInt(Integer::intValue).toArray();
     }
+
+    public void findTwoSum(int[] nums, int currentIdx, int currentSum, int target, List<Integer> accumulator) {
+        if (currentIdx >= nums.length) {
+            return;
+        }
+        int newSum = nums[currentIdx] + currentSum;
+
+        if (newSum > target) {
+            findTwoSum(nums, currentIdx + 1, currentSum, target, accumulator);
+        } else if (newSum == target) {
+            accumulator.add(currentIdx);
+            return;
+        }
+
+        accumulator.add(currentIdx);
+        findTwoSum(nums, currentIdx + 1, newSum, target, accumulator);
+
+    }
+
+
 }
