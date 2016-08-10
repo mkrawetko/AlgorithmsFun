@@ -13,9 +13,9 @@ repositories {
 }
 
 ext.junit4Version = '4.12'
-ext.junitVintageVersion = '4.12.0-M1'
-ext.junitPlatformVersion = '1.0.0-M1'
-ext.junitJupiterVersion = '5.0.0-M1'
+ext.junitVintageVersion = '4.12.0-M2'
+ext.junitPlatformVersion = '1.0.0-M2'
+ext.junitJupiterVersion = '5.0.0-M2'
 ext.log4JVersion = '2.5'
 
 group 'com.mkrawetko'
