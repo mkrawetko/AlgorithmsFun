@@ -20,20 +20,24 @@ public class TwoSum {
 
     public int[] twoSum(int[] nums, int target) {
         ArrayList<Integer> accumulator = new ArrayList<>();
-        findTwoSum(nums, 0, 0, target, accumulator);
+//        findTwoSum(nums, 0, 0, target, accumulator);
 
+        for (int i = 0; i < nums.length; i++) {
+            findTwoSum(nums, );
+        }
 
         return Arrays.stream(accumulator.toArray(new Integer[0])).mapToInt(Integer::intValue).toArray();
     }
 
     public void findTwoSum(int[] nums, int currentIdx, int currentSum, int target, List<Integer> accumulator) {
-        if (currentIdx >= nums.length) {
+        if (currentIdx >= nums.length || currentSum == target) {
             return;
         }
         int newSum = nums[currentIdx] + currentSum;
 
         if (newSum > target) {
             findTwoSum(nums, currentIdx + 1, currentSum, target, accumulator);
+            return;
         } else if (newSum == target) {
             accumulator.add(currentIdx);
             return;
