@@ -1,8 +1,6 @@
 package com.mkrawetko;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Given an array of integers,
@@ -19,33 +17,35 @@ import java.util.List;
 public class TwoSum {
 
     public int[] twoSum(int[] nums, int target) {
-        ArrayList<Integer> accumulator = new ArrayList<>();
-//        findTwoSum(nums, 0, 0, target, accumulator);
+        Integer first = null;
+        Integer second = null;
+        int[] numsSorted = Arrays.copyOf(nums, nums.length);
+        Arrays.sort(numsSorted);
+        for (int i = 0; i < numsSorted.length - 1; i++) {
+            int diff = target - numsSorted[i];
+            for (int j = i + 1; j < numsSorted.length; j++) {
+                if (numsSorted[j] == diff) {
+                    for (int k = 0; k < nums.length; k++) {
 
-        for (int i = 0; i < nums.length; i++) {
-            findTwoSum(nums, );
+                        if (nums[k] == numsSorted[i] && first == null && (second == null || k != second)) {
+                            first = k;
+                        }
+                        if (nums[k] == numsSorted[j] && second == null && (first == null || k != first)) {
+                            second = k;
+                        }
+                        if (first != null && second != null) {
+                            int max = Math.max(first, second);
+                            int min = Math.min(first, second);
+                            return new int[]{min, max};
+                        }
+                    }
+                }
+                if (numsSorted[j] > diff) {
+                    break;
+                }
+            }
         }
-
-        return Arrays.stream(accumulator.toArray(new Integer[0])).mapToInt(Integer::intValue).toArray();
-    }
-
-    public void findTwoSum(int[] nums, int currentIdx, int currentSum, int target, List<Integer> accumulator) {
-        if (currentIdx >= nums.length || currentSum == target) {
-            return;
-        }
-        int newSum = nums[currentIdx] + currentSum;
-
-        if (newSum > target) {
-            findTwoSum(nums, currentIdx + 1, currentSum, target, accumulator);
-            return;
-        } else if (newSum == target) {
-            accumulator.add(currentIdx);
-            return;
-        }
-
-        accumulator.add(currentIdx);
-        findTwoSum(nums, currentIdx + 1, newSum, target, accumulator);
-
+        return new int[0];
     }
 
 
