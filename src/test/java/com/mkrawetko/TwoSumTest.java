@@ -58,9 +58,17 @@ public class TwoSumTest {
 
 
     @org.junit.Test
-    public void testTwoSum() throws Exception {
+    public void testTwoSumSortedArray() throws Exception {
 
-        final int[] actual = underTest.twoSum(nums, target);
+        final int[] actual = underTest.twoSumArraySorted(nums, target);
+
+        assertThat(actual, equalTo(expected));
+    }
+
+    @org.junit.Test
+    public void testTwoSumHashMap() throws Exception {
+
+        final int[] actual = underTest.twoSumHashMap(nums, target);
 
         assertThat(actual, equalTo(expected));
     }

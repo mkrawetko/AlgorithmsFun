@@ -1,6 +1,8 @@
 package com.mkrawetko;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Given an array of integers,
@@ -16,7 +18,7 @@ import java.util.Arrays;
  */
 public class TwoSum {
 
-    public int[] twoSum(int[] nums, int target) {
+    public int[] twoSumArraySorted(int[] nums, int target) {
         Integer first = null;
         Integer second = null;
         int[] numsSorted = Arrays.copyOf(nums, nums.length);
@@ -39,13 +41,24 @@ public class TwoSum {
                             return new int[]{min, max};
                         }
                     }
-                }
-                if (numsSorted[j] > diff) {
+                } else if (numsSorted[j] > diff) {
                     break;
                 }
             }
         }
         return new int[0];
+    }
+
+    public int[] twoSumHashMap(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                return new int[]{map.get(complement), i};
+            }
+            map.put(nums[i], i);
+        }
+        throw new IllegalArgumentException("no two sum solution");
     }
 
 

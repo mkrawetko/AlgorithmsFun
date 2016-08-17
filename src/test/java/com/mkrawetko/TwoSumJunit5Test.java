@@ -19,7 +19,7 @@ public class TwoSumJunit5Test {
 
 
         return Arrays.asList(
-                dynamicTest("nums: {2, 7, 11, 15}; target: 9; expected {0,1}", () -> assertEquals(new int[]{0, 1}, underTest.twoSum(new int[]{2, 7, 11, 15}, 9)))
+                dynamicTest("nums: {2, 7, 11, 15}; target: 9; expected {0,1}", () -> assertEquals(new int[]{0, 1}, underTest.twoSumArraySorted(new int[]{2, 7, 11, 15}, 9)))
         ).iterator();
 
     }
