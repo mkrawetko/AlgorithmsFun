@@ -27,6 +27,9 @@ public class ZigZagConversionTest {
         return Arrays.asList(new Object[][]{
                 {"", 1, ""}
                 , {"PAYPALISHIRING", 3, "PAHNAPLSIIGYIR"}
+                , {"PAYPALISHIRING", 4, "PINALSIGYAHRPI"}
+                , {"ABC", 2, "ACB"}
+                , {"ABCDE", 4, "ABCED"}
         });
     }
 
