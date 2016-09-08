@@ -26,6 +26,7 @@ public class ZigZagConversionTest {
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
                 {"", 1, ""}
+                , {"A", 2, "A"}
                 , {"PAYPALISHIRING", 3, "PAHNAPLSIIGYIR"}
                 , {"PAYPALISHIRING", 4, "PINALSIGYAHRPI"}
                 , {"ABC", 2, "ACB"}
