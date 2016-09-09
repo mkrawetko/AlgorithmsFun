@@ -22,27 +22,21 @@ public class ZigZagConversion {
             return s;
         }
         int idx = 0;
+        int incr = 1;
         StringBuilder[] accu = new StringBuilder[numRows];
-        while (idx < s.length()) {
-            for (int i = 0; i < numRows && idx < s.length(); i++) {
-                StringBuilder row = accu[i];
-                if (row == null) {
-                    row = new StringBuilder();
-                    accu[i] = row;
-                }
-                row.append(s.charAt(idx++));
-            }
-            for (int i = numRows - 2; i > 0; i--) {
-                if (idx >= s.length()) {
-                    break;
-                }
-                accu[i].append(s.charAt(idx++));
-            }
+        for (int i = 0; i < numRows; i++) {
+            accu[i] = new StringBuilder();
+        }
+        for (int i = 0; i < s.length(); i++) {
+            accu[idx].append(s.charAt(i));
+            if (idx == 0) incr = 1;
+            else if (idx == numRows - 1) incr = -1;
+            idx += incr;
         }
 
         String r = "";
         for (StringBuilder anAccu : accu) {
-            r += anAccu.toString();
+            r += anAccu;
         }
 
         return r;
