@@ -9,11 +9,16 @@ package com.mkrawetko;
 public class ReverseString {
 
     public String reverseString(String s) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = s.length() - 1; i >= 0; i--) {
-            sb.append(s.charAt(i));
+        char[] chars = s.toCharArray();
+        int start = 0;
+        int end = s.length() - 1;
+
+        while (start < end) {
+            char tmp = chars[start];
+            chars[start++] = chars[end];
+            chars[end--] = tmp;
         }
-        return sb.toString();
+        return new String(chars);
     }
 
 }
