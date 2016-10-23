@@ -8,7 +8,12 @@ package com.mkrawetko;
  */
 public class SumOfTwoIntegers {
     public int getSum(int a, int b) {
-        return 0;
+        int and = a & b;
+        int xor = a ^ b;
+        if (and == 0) {
+            return xor;
+        }
+        return getSum(and << 1, xor);
     }
 }
 

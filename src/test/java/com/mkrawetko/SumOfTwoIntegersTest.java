@@ -26,6 +26,8 @@ public class SumOfTwoIntegersTest {
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
                 {1, 2, 3},
+                {1, 3, 4},
+                {5, 4, 9},
         });
     }
 
