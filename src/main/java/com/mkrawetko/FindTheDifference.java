@@ -1,22 +1,17 @@
 package com.mkrawetko;
 
-import java.util.Arrays;
-
 public class FindTheDifference {
     public char findTheDifference(String s, String t) {
 
-        char[] sSorted = s.toCharArray();
-        Arrays.sort(sSorted);
-
-        char[] tSorted = t.toCharArray();
-        Arrays.sort(tSorted);
-
-        for (int i = 0; i < s.length(); i++) {
-            if (sSorted[i] != tSorted[i]) {
-                return tSorted[i];
-            }
+        char[] sArr = s.toCharArray();
+        char[] tArr = t.toCharArray();
+        int sum = 0;
+        for (int i = 0; i < sArr.length; i++) {
+            sum -= sArr[i];
+            sum += tArr[i];
         }
+        sum += tArr[tArr.length - 1];
 
-        return tSorted[t.length() - 1];
+        return (char) sum;
     }
 }
