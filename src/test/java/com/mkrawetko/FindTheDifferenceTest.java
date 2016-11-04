@@ -38,11 +38,13 @@ public class FindTheDifferenceTest {
     @TestFactory
     Stream<DynamicTest> findTheDifferenceTest() {
 
-        return DynamicTest.stream(asList(
-                new TestInput<>(new Pair<>("abcd", "abcde"), "e")
+        return DynamicTest.stream(
+                asList(
+                        new TestInput<>(new Pair<>("abcd", "abcde"), 'e'),
+                        new TestInput<>(new Pair<>("ae", "aea"), 'a')
                 ).iterator(),
                 (input) -> "input: " + input,
-                (ti) -> assertEquals(ti.expected, underTest.findTheDifference(ti.input.first, ti.input.second))
+                (ti) -> assertEquals(ti.expected, (Character) underTest.findTheDifference(ti.input.first, ti.input.second))
         );
     }
 }

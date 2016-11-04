@@ -5,8 +5,18 @@ import java.util.Arrays;
 public class FindTheDifference {
     public char findTheDifference(String s, String t) {
 
-        Arrays.sort(s.toCharArray());
+        char[] sSorted = s.toCharArray();
+        Arrays.sort(sSorted);
 
-        return 0;
+        char[] tSorted = t.toCharArray();
+        Arrays.sort(tSorted);
+
+        for (int i = 0; i < s.length(); i++) {
+            if (sSorted[i] != tSorted[i]) {
+                return tSorted[i];
+            }
+        }
+
+        return tSorted[t.length() - 1];
     }
 }
