@@ -43,7 +43,7 @@ public class FindTheDifferenceTest {
                         new TestInput<>(new Pair<>("abcd", "abcde"), 'e'),
                         new TestInput<>(new Pair<>("ae", "aea"), 'a')
                 ).iterator(),
-                (input) -> "input: " + input,
+                TestInput::toString,
                 (ti) -> assertEquals(ti.expected, (Character) underTest.findTheDifference(ti.input.first, ti.input.second))
         );
     }
