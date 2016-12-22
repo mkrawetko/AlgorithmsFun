@@ -1,8 +1,8 @@
 package com.mkrawetko;
 
 
-import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -39,19 +39,33 @@ import java.util.Set;
  */
 public class FindAllAnagramsInAString {
     public List<Integer> findAnagrams(String s, String p) {
+        final List<Integer> anagrams = new LinkedList<>();
 
         Set<Character> pSet = new HashSet<Character>();
         char[] pChars = p.toCharArray();
-        Arrays.sort(pChars);
-
-        char[] sChars = s.toCharArray();
-        for (int i = 0; i < sChars.length; i += pChars.length) {
+        int psum = 0;
+        for (char c : pChars) {
+            psum += c;
+            pSet.add(c);
 
         }
 
+        char[] sChars = s.toCharArray();
+        for (int i = 0; i < sChars.length; i += 1) {
+            int nsum = 0;
+
+            for (int j = i; j < i + pChars.length && j < sChars.length; j++) {
+                nsum += sChars[j];
+                if (!pSet.contains(sChars[j]) || nsum > psum) {
+                    break;
+                } else if (nsum == psum) {
+                    anagrams.add(i);
+                }
+            }
+        }
 
 
-        return null;
+        return anagrams;
     }
 
 
