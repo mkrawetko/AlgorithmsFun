@@ -8,12 +8,15 @@ import org.junit.jupiter.api.TestFactory;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static java.time.Duration.ofSeconds;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTimeout;
 
 
 public class FindAllAnagramsInAStringTest {
@@ -46,10 +49,12 @@ public class FindAllAnagramsInAStringTest {
                 asList(
                         new TestInput<>(new Pair<>("abab", "ab"), asList(0, 1, 2)),
                         new TestInput<>(new Pair<>("cbaebabacd", "abc"), asList(0, 6)),
+                        new TestInput<>(new Pair<>("af", "be"), Collections.emptyList()),
                         BIG_INPUT
                 ).iterator(),
                 TestInput::toString,
-                (ti) -> assertEquals(ti.expected, underTest.findAnagrams(ti.input.first, ti.input.second))
+                (ti) -> assertTimeout(ofSeconds(1),
+                        () -> assertEquals(ti.expected, underTest.findAnagrams(ti.input.first, ti.input.second)))
         );
     }
 }

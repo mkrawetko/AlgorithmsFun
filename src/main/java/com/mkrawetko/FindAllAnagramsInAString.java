@@ -41,22 +41,22 @@ public class FindAllAnagramsInAString {
     public List<Integer> findAnagrams(String s, String p) {
         final List<Integer> anagrams = new LinkedList<>();
 
-        Set<Character> pSet = new HashSet<Character>();
+        Set<Character> pSet = new HashSet<>();
         char[] pChars = p.toCharArray();
         int psum = 0;
         for (char c : pChars) {
             psum += c;
             pSet.add(c);
-
         }
 
         char[] sChars = s.toCharArray();
-        for (int i = 0; i < sChars.length; i += 1) {
-            int nsum = 0;
+        for (int i = 0; i < sChars.length - pChars.length + 1; i += 1) {
 
+            int nsum = 0;
             for (int j = i; j < i + pChars.length && j < sChars.length; j++) {
                 nsum += sChars[j];
                 if (!pSet.contains(sChars[j]) || nsum > psum) {
+                    i = j;
                     break;
                 } else if (nsum == psum) {
                     anagrams.add(i);
