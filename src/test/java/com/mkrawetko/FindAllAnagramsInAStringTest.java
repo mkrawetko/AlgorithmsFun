@@ -48,6 +48,7 @@ public class FindAllAnagramsInAStringTest {
         return DynamicTest.stream(
                 asList(
                         new TestInput<>(new Pair<>("abab", "ab"), asList(0, 1, 2)),
+                        new TestInput<>(new Pair<>("ababababab", "aab"), asList(0, 2, 4, 6)),
                         new TestInput<>(new Pair<>("cbaebabacd", "abc"), asList(0, 6)),
                         new TestInput<>(new Pair<>("af", "be"), Collections.emptyList()),
                         BIG_INPUT

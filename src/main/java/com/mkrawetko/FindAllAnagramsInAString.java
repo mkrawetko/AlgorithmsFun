@@ -1,10 +1,8 @@
 package com.mkrawetko;
 
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
@@ -41,12 +39,12 @@ public class FindAllAnagramsInAString {
     public List<Integer> findAnagrams(String s, String p) {
         final List<Integer> anagrams = new LinkedList<>();
 
-        Set<Character> pSet = new HashSet<>();
+        int[] pcount = new int[129];
         char[] pChars = p.toCharArray();
         int psum = 0;
-        for (char c : pChars) {
+        for (int c : pChars) {
             psum += c;
-            pSet.add(c);
+            pcount[c]++;
         }
 
         char[] sChars = s.toCharArray();
@@ -54,8 +52,9 @@ public class FindAllAnagramsInAString {
 
             int nsum = 0;
             for (int j = i; j < i + pChars.length && j < sChars.length; j++) {
-                nsum += sChars[j];
-                if (!pSet.contains(sChars[j]) || nsum > psum) {
+                int sc = sChars[j];
+                nsum += sc;
+                if (nsum > psum || pcount[sc] == 0) {
                     i = j;
                     break;
                 } else if (nsum == psum) {
