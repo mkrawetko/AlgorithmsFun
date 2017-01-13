@@ -55,7 +55,6 @@ public class FindAllAnagramsInAString {
                 int sc = sChars[j];
                 nsum += sc;
                 if (nsum > psum || pcount[sc] == 0) {
-                    i = j;
                     break;
                 } else if (nsum == psum) {
                     anagrams.add(i);
