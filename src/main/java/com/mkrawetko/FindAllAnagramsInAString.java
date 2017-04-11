@@ -39,29 +39,24 @@ public class FindAllAnagramsInAString {
     public List<Integer> findAnagrams(String s, String p) {
         final List<Integer> anagrams = new LinkedList<>();
 
-        int[] pcount = new int[129];
-        char[] pChars = p.toCharArray();
-        int psum = 0;
-        for (int c : pChars) {
-            psum += c;
-            pcount[c]++;
+        int[] hash = new int[129];
+        for (int c : p.toCharArray()) {
+            hash[c]++;
         }
+        int left = 0, right = 0;
+        while (s.length() > right) {
 
-        char[] sChars = s.toCharArray();
-        for (int i = 0; i < sChars.length - pChars.length + 1; i += 1) {
-
-            int nsum = 0;
-            for (int j = i; j < i + pChars.length && j < sChars.length; j++) {
-                int sc = sChars[j];
-                nsum += sc;
-                if (nsum > psum || pcount[sc] == 0) {
-                    break;
-                } else if (nsum == psum) {
-                    anagrams.add(i);
+            if (--hash[s.charAt(right++)] < 0) {
+                while (hash[s.charAt(right - 1)] < 0) {
+                    hash[s.charAt(left++)]++;
                 }
             }
-        }
 
+            if (right - left == p.length()) {
+                anagrams.add(left);
+                hash[s.charAt(left++)]++;
+            }
+        }
 
         return anagrams;
     }
