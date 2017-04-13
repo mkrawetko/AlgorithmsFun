@@ -43,19 +43,17 @@ public class FindAllAnagramsInAString {
         for (int c : p.toCharArray()) {
             hash[c]++;
         }
-        int left = 0, right = 0;
+        int left = 0, right = 0, count = p.length();
         while (s.length() > right) {
 
-            if (--hash[s.charAt(right++)] < 0) {
-                while (hash[s.charAt(right - 1)] < 0) {
-                    hash[s.charAt(left++)]++;
-                }
-            }
 
-            if (right - left == p.length()) {
-                anagrams.add(left);
-                hash[s.charAt(left++)]++;
-            }
+            if (hash[s.charAt(right++)]-- >= 1) count--;
+
+            if (count == 0) anagrams.add(left);
+
+
+            if (right - left == p.length() && hash[s.charAt(left++)]++ >= 0) count++;
+
         }
 
         return anagrams;
