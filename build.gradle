@@ -15,9 +15,9 @@ repositories {
 apply plugin: 'org.junit.platform.gradle.plugin'
 
 ext.junit4Version = '4.12'
-ext.junitVintageVersion = '4.12.0-M3'
-ext.junitPlatformVersion = '1.0.0-M3'
-ext.junitJupiterVersion = '5.0.0-M3'
+ext.junitVintageVersion = '4.12.0-RC3'
+ext.junitPlatformVersion = '1.0.0-RC3'
+ext.junitJupiterVersion = '5.0.0-RC3'
 ext.log4JVersion = '2.5'
 
 group 'com.mkrawetko'
@@ -57,14 +57,12 @@ junitPlatform {
 }
 
 dependencies {
-//    testCompile group: 'junit', name: 'junit', version: '4.11'
-//    / JUnit Jupiter API and TestEngine implementation
-    testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
-
-//	 If you also want to support JUnit 3 and JUnit 4 tests
     testCompile("junit:junit:${junit4Version}")
+    testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
     testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}")
+
+    testRuntime("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
 
     testRuntime("org.apache.logging.log4j:log4j-core:${log4JVersion}")
     testRuntime("org.apache.logging.log4j:log4j-jul:${log4JVersion}")
