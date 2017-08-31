@@ -25,7 +25,21 @@
  * @return {number}
  */
 var hammingDistance = function(x, y) {
-    return 3;
+    let c = 0;
+    if(x%2 != y%2){
+        c++;
+    }
+//    console.log("starting x"+x + "; y"+y +" c"+c);
+    while(x!=0 || y!=0){
+        x>>=1;
+        y>>=1;
+//        console.log("x"+x + "; y"+y +" c"+c);
+        if(x%2 != y%2){
+            c++;
+        }
+    }
+//    console.log("before return x"+x + "; y"+y +" c"+c);
+    return c;
 };
 
 module.exports = hammingDistance;
