@@ -26,11 +26,8 @@
  */
 var hammingDistance = function(x, y) {
     let z = x^y;
-    let c = z&1;
-    while((z>>=1)!=0){
-        c+=z&1;
-    }
-    return c;
+    if(z===0) return 0
+    return (z%2) + hammingDistance(x/2,y/2)
 };
 
 module.exports = hammingDistance;
