@@ -25,9 +25,7 @@
  * @return {number}
  */
 var hammingDistance = function(x, y) {
-    let z = x^y;
-    if(z===0) return 0
-    return (z%2) + hammingDistance(x/2,y/2)
+    return (x^y).toString(2).replace(/0/g,'').length;
 };
 
 module.exports = hammingDistance;
