@@ -40,15 +40,25 @@ sourceCompatibility = 1.8
 dependencies {
     testCompile("junit:junit:${junit4Version}")
     testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
-    
+    testCompile("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
+
+    testCompile("org.apiguardian:apiguardian-api:1.0.0")
+
     testRuntime("org.junit.platform:junit-platform-launcher:${junitPlatformVersion}")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
     testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}")
 
-    testCompile("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
 }
 
 
+task testNpm(dependsOn: [npm_install,npm_test]){
+
+}
+
+task testAll(dependsOn: [check,testNpm]){
+}
+
+npm_test.mustRunAfter npm_install
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.2'
