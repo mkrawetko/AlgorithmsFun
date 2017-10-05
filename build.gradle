@@ -51,14 +51,11 @@ dependencies {
 }
 
 
-task testNpm(dependsOn: [npm_install,npm_test]){
 
-}
-
-task testAll(dependsOn: [check,testNpm]){
-}
+task testAll(dependsOn: [check,npm_test])
 
 npm_test.mustRunAfter npm_install
+npm_version.mustRunAfter npm_install
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.2'

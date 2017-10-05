@@ -4,4 +4,4 @@ jdk:
   - oraclejdk8
 
 script:
-  - ./gradlew clean testAll
+  - ./gradlew clean npm_install npm_version testAll
