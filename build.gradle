@@ -37,7 +37,7 @@ dependencies {
     testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
     testRuntime("org.junit.vintage:junit-vintage-engine:${junitVintageVersion}")
 
-    testComplie("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
+    testCompile("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
 }
 
 
