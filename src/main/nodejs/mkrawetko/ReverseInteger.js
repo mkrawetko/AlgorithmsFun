@@ -22,33 +22,18 @@
  * @return {number}
  */
 var reverse = function(x) {
-        if(x === 0 ){
-            return 0
+        let str = x.toString()
+        let res = ""
+        if(str[0] === '-'){
+            str = str.substr(1)
+            res +='-'
         }
-       let str = x.toString()
-       let res = ""
-       let idx = 0;
-       let addSign = false;
-       while(idx<str.length){
-           let c = str[idx]
-           if(c==='-'){
-               addSign = true
-           }else if(c!=='0' || parseInt(str.substr(idx)) !== 0){
-               res = c+res;
-           }
-           idx++
-       }
+        for(idx = str.length-1;idx>=0;idx --){
+             res += str[idx];
+        }
+        let ret = parseInt(res)
 
-        if(addSign){
-            res = '-'+res;
-        }
-       let ret = parseInt(res)
-       if(addSign && ret > 0){
-            return 0;
-       }else if(!addSign && ret<0){
-            return 0
-       }
-       return ret;
+        return ((ret | 0) !== ret)?0:ret
 };
 
 module.exports = reverse;
