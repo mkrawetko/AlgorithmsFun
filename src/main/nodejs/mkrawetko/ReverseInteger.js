@@ -1,5 +1,3 @@
-
-
 //Given a 32-bit signed integer, reverse digits of an integer.
 //
 //Example 1:
@@ -21,19 +19,17 @@
  * @param {number} x
  * @return {number}
  */
-var reverse = function(x) {
-        let str = x.toString()
-        let res = ""
-        if(str[0] === '-'){
-            str = str.substr(1)
-            res +='-'
-        }
-        for(idx = str.length-1;idx>=0;idx --){
-             res += str[idx];
-        }
-        let ret = parseInt(res)
-
-        return ((ret | 0) !== ret)?0:ret
+var reverse = function (x) {
+    let absX = Math.abs(x);
+    let res = 0;
+    while (absX > 0) {
+        res = res * 10 + absX % 10;
+        absX = Math.floor(absX / 10)
+    }
+    if (x < 0) {
+        res = -res;
+    }
+    return ((res | 0) !== res) ? 0 : res;
 };
 
 module.exports = reverse;
