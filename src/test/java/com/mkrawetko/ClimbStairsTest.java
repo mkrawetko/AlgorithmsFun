@@ -1,43 +1,52 @@
 package com.mkrawetko;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.stream.Stream;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.params.provider.Arguments.of;
 
-@RunWith(Parameterized.class)
 public class ClimbStairsTest {
 
     final ClimbStairs underTest = new ClimbStairs();
-    @Parameterized.Parameter
-    public int steps;
-    @Parameterized.Parameter(value = 1)
-    public int expected;
 
-    @Parameterized.Parameters
-    public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][]{
-                {1, 1},
-                {2, 2},
-                {3, 3},
-                {4, 5},
-                {5, 8},
-                {6, 13},
-                {7, 21},
-                {8, 34},
-        });
+    public static Stream<Arguments> data() {
+        return Stream.of(of(1, 1),
+                of(1, 1),
+                of(2, 2),
+                of(3, 3),
+                of(4, 5),
+                of(5, 8),
+                of(6, 13),
+                of(7, 21),
+                of(8, 34)
+        );
     }
 
-    @Test
-    public void climbStairs() throws Exception {
-        int actual = underTest.climbStairs(steps);
 
-        assertThat(actual, equalTo(expected));
+    @ParameterizedTest
+    @MethodSource("data")
+    public void climbStairsIterativeTmp(int steps, int expected) {
+        int actual = underTest.climbStairsIterativeTmp(steps);
 
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @MethodSource("data")
+    public void climbStairsRecursive(int steps, int expected) {
+        int actual = underTest.climbStairsRecursive(steps);
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @MethodSource("data")
+    public void climbStairsIterativeWithCache(int steps, int expected) {
+        int actual = underTest.climbStairsIterativeWithCache(steps);
+
+        assertEquals(expected, actual);
     }
 }
