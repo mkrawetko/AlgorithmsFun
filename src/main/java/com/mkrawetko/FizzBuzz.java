@@ -19,11 +19,10 @@ public class FizzBuzz {
                 result += "Buzz";
             }
             if (DEFAULT.equals(result)) {
-                result = "" + i;
+                result += i;
             }
             results.add(result);
         }
-
         return results;
     }
 

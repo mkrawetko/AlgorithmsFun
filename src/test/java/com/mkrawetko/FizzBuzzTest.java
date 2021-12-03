@@ -1,85 +1,60 @@
 package com.mkrawetko;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertThat;
+import static java.util.Arrays.asList;
+import static org.junit.jupiter.params.provider.Arguments.of;
 
 /**
- * Write a program that outputs the string representation of numbers from 1 to n.
+ * Given an integer n, return a string array answer (1-indexed) where:
  * <p>
- * But for multiples of three it should output “Fizz” instead of the number and for the multiples of five output “Buzz”.
- * For numbers which are multiples of both three and five output “FizzBuzz”.
+ * answer[i] == "FizzBuzz" if i is divisible by 3 and 5.
+ * answer[i] == "Fizz" if i is divisible by 3.
+ * answer[i] == "Buzz" if i is divisible by 5.
+ * answer[i] == i if non of the above conditions are true.
  * <p>
- * Example:
  * <p>
- * n = 15,
+ * Example 1:
  * <p>
- * Return:
- * [
- * "1",
- * "2",
- * "Fizz",
- * "4",
- * "Buzz",
- * "Fizz",
- * "7",
- * "8",
- * "Fizz",
- * "Buzz",
- * "11",
- * "Fizz",
- * "13",
- * "14",
- * "FizzBuzz"
- * ]
+ * Input: n = 3
+ * Output: ["1","2","Fizz"]
+ * Example 2:
+ * <p>
+ * Input: n = 5
+ * Output: ["1","2","Fizz","4","Buzz"]
+ * Example 3:
+ * <p>
+ * Input: n = 15
+ * Output: ["1","2","Fizz","4","Buzz","Fizz","7","8","Fizz","Buzz","11","Fizz","13","14","FizzBuzz"]
+ * <p>
+ * <p>
+ * Constraints:
+ * <p>
+ * 1 <= n <= 104
  */
-@RunWith(Parameterized.class)
 public class FizzBuzzTest {
 
+    private final FizzBuzz underTest = new FizzBuzz();
 
-    @Parameterized.Parameter(value = 0)
-    public int nums;
-    @Parameterized.Parameter(value = 1)
-    public List<String> expected;
-    private FizzBuzz underTest = new FizzBuzz();
-
-
-    @Parameterized.Parameters
-    public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][]{
-                {15, Arrays.asList("1",
-                        "2",
-                        "Fizz",
-                        "4",
-                        "Buzz",
-                        "Fizz",
-                        "7",
-                        "8",
-                        "Fizz",
-                        "Buzz",
-                        "11",
-                        "Fizz",
-                        "13",
-                        "14",
-                        "FizzBuzz")},
-
-        });
+    public static Stream<Arguments> data() {
+        return Stream.of(of(3, asList("1", "2", "Fizz")),
+                of(5, asList("1", "2", "Fizz", "4", "Buzz")),
+                of(15, asList("1", "2", "Fizz", "4", "Buzz", "Fizz", "7", "8", "Fizz", "Buzz", "11", "Fizz", "13", "14", "FizzBuzz")));
     }
 
-
-    @Test
-    public void test() throws Exception {
+    @ParameterizedTest
+    @MethodSource("data")
+    public void test(int nums, List<String> expected) throws Exception {
 
         final List<String> actual = underTest.fizzBuzz(nums);
 
-        assertThat(actual, equalTo(expected));
+        Assertions.assertEquals(expected, actual);
     }
 
 }
