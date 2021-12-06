@@ -1,48 +1,51 @@
 package com.mkrawetko;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.stream.Stream;
 
 import static java.lang.Integer.parseUnsignedInt;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.params.provider.Arguments.of;
 
-@RunWith(Parameterized.class)
 public class NumberOf1BitsTest {
 
+    private final NumberOf1Bits underTest = new NumberOf1Bits();
 
-    @Parameterized.Parameter
-    public int unsignedInteger;
-    @Parameterized.Parameter(value = 1)
-    public int expected;
-    private NumberOf1Bits underTest = new NumberOf1Bits();
 
-    @Parameterized.Parameters
-    public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][]{
-                {1, 1},  //0001
-                {2, 1},  //0010
-                {3, 2},  //0011
-                {4, 1},  //0100
-                {5, 2},  //0101
-                {6, 2},  //0110
-                {7, 3},  //0111
-                {8, 1},  //1000
-                {11, 3}, //1011
-                {parseUnsignedInt("2147483648"), 1}, //10000000000000000000000000000000
-        });
+    public static Stream<Arguments> data() {
+        return Stream.of(
+                of(1, 1),  //0001
+                of(2, 1),  //0010
+                of(3, 2),  //0011
+                of(4, 1),  //0100
+                of(5, 2),  //0101
+                of(6, 2),  //0110
+                of(7, 3),  //0111
+                of(8, 1),  //1000
+                of(11, 3), //1011
+                of(parseUnsignedInt("00000000000000000000000010000000", 2), 1), //00000000000000000000000010000000
+                of(parseUnsignedInt("11111111111111111111111111111101", 2), 31),
+                of(parseUnsignedInt("10000000000000000000000000000000", 2), 1)
+        );
     }
 
 
-    @Test
-    public void test() throws Exception {
+    @ParameterizedTest
+    @MethodSource("data")
+    public void test(int unsignedInteger, int expected) throws Exception {
         int actual = underTest.hammingWeight(unsignedInteger);
 
-        assertThat(actual, equalTo(expected));
+        Assertions.assertEquals(expected, actual);
+    }
 
+    @ParameterizedTest
+    @MethodSource("data")
+    public void shouldReturnNumberOfBits_recursive(int unsignedInteger, int expected) {
+        int actual = underTest.hammingWeightRecursive(unsignedInteger);
+
+        Assertions.assertEquals(expected, actual);
     }
 }
