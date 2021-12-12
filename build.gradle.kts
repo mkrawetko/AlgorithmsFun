@@ -14,10 +14,15 @@ dependencies {
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
 }
 
-tasks.test {
-    useJUnitPlatform()
-    testLogging {
-        events("passed", "skipped", "failed")
+tasks {
+    test {
+        useJUnitPlatform()
+        testLogging {
+            events("passed", "skipped", "failed")
+        }
+    }
+    wrapper {
+        distributionType = Wrapper.DistributionType.ALL
     }
 }
 
