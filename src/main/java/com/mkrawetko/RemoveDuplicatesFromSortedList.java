@@ -1,26 +1,34 @@
 package com.mkrawetko;
 
 /**
- * Given a sorted linked list, delete all duplicates such that each element appear only once.
+ * https://leetcode.com/problems/remove-duplicates-from-sorted-list/
+ * Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
  * <p>
- * For example,
- * Given 1->1->2, return 1->2.
- * Given 1->1->2->3->3, return 1->2->3.
+ * Example 1:
+ * Input: head = [1,1,2]
+ * Output: [1,2]
+ * <p>
+ * Example 2:
+ * Input: head = [1,1,2,3,3]
+ * Output: [1,2,3]
+ * <p>
+ * Constraints:
+ * <p>
+ * The number of nodes in the list is in the range [0, 300].
+ * -100 <= Node.val <= 100
+ * The list is guaranteed to be sorted in ascending order.
  */
 public class RemoveDuplicatesFromSortedList {
 
-
     public ListNode deleteDuplicates(ListNode head) {
-        ListNode currentNode = head;
-        while (currentNode != null && currentNode.next != null) {
-            ListNode nextNode = currentNode.next;
-            while (nextNode != null && currentNode.val == nextNode.val) {
-                nextNode = nextNode.next;
+        ListNode curr = head;
+        while (curr.next != null) {
+            if (curr.next.val == curr.val) {
+                curr.next = curr.next.next;
+            } else {
+                curr = curr.next;
             }
-            currentNode.next = nextNode;
-            currentNode = nextNode;
         }
-
         return head;
     }
 
@@ -31,32 +39,13 @@ public class RemoveDuplicatesFromSortedList {
         int val;
         ListNode next;
 
-        ListNode(int x) {
-            val = x;
+        ListNode(int val) {
+            this.val = val;
         }
 
-        @Override
-        public String toString() {
-            return "" + val + "->" + next;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            ListNode listNode = (ListNode) o;
-
-            if (val != listNode.val) return false;
-            return next != null ? next.equals(listNode.next) : listNode.next == null;
-
-        }
-
-        @Override
-        public int hashCode() {
-            int result = val;
-            result = 31 * result + (next != null ? next.hashCode() : 0);
-            return result;
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
         }
     }
 
