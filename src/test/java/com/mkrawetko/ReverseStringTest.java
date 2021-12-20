@@ -1,38 +1,52 @@
 package com.mkrawetko;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.stream.Stream;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.params.provider.Arguments.of;
 
-@RunWith(Parameterized.class)
 public class ReverseStringTest {
-    @Parameterized.Parameter(value = 0)
-    public String str;
-    @Parameterized.Parameter(value = 1)
-    public String expected;
 
     ReverseString underTest = new ReverseString();
 
-
-    @Parameterized.Parameters
-    public static Collection<Object[]> data() {
-        return Arrays.asList(new Object[][]{
-                {"hello", "olleh"}
-        });
+    public static Stream<Arguments> data() {
+        return Stream.of(of("hello", "olleh"),
+                of("Hannah", "hannaH"));
     }
 
-    @Test
-    public void test() {
-
+    @ParameterizedTest
+    @MethodSource("data")
+    public void test(String str, String expected) {
         String actual = underTest.reverseString(str);
 
-        assertThat(actual, equalTo(expected));
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @MethodSource("data")
+    public void test_recursive(String str, String expected) {
+        String actual = underTest.reverseStringRecursive(str);
+
+        assertEquals(expected, actual);
+    }
+    @ParameterizedTest
+    @MethodSource("data")
+    public void shouldRevertStringSubString(String str, String expected) {
+        String actual = underTest.reverseStringSubString(str);
+
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @MethodSource("data")
+    public void shouldRevertStringSubStringRecursive(String str, String expected) {
+        String actual = underTest.reverseStringSubStringRecursive(str);
+
+        assertEquals(expected, actual);
     }
 
 
