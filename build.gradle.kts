@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.6.0"
-    id("com.github.node-gradle.node") version "3.1.1"
+    kotlin("jvm") version "2.2.0"
+    id("com.github.node-gradle.node") version "7.1.0"
 }
 
 repositories {
@@ -8,10 +8,13 @@ repositories {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.8.2"))
+    testImplementation(platform("org.junit:junit-bom:5.13.4"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+
     testCompileOnly("junit:junit:4.13.2")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
+
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks {
@@ -34,6 +37,6 @@ node {
     download.set(true)
 }
 
-task("testAll") {
+tasks.register("testAll") {
     dependsOn("check", "npm_test")
 }
