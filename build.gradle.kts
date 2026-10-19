@@ -15,6 +15,7 @@ dependencies {
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine")
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
 }
 
 tasks {
