@@ -1,4 +1,4 @@
-package com.mkrawetko.alg
+package com.mkrawetko.alg.karat
 
 
 /*
